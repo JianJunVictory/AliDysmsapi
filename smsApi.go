@@ -19,7 +19,17 @@ type SendSmsReply struct {
 	BizId string `json:"BizId"`
 	RequestId string `json:"RequestId"`
 }
-func SendSms(phone, accessKeyId, accessKeySecret, TemplateParam,TemplateCode string) (*SendSmsReply,error) {
+/**
+* @param phone 发送短信的手机号
+* @param accessKeyId 开通阿里短信服务时的秘钥Id
+* @param accessKeySecret 开通阿里短信服务时的秘钥
+* @param TemplateParam 短信模版
+* @param TemplateCode 短信编码
+* @param SignName 短信签名
+* @return SendSmsReply 结构体实例
+* @return error 错误信息
+*/
+func SendSms(phone, accessKeyId, accessKeySecret, TemplateParam,TemplateCode,SignName string) (*SendSmsReply,error) {
 	// 第一步：请求参数
 	paras := make(map[string]string)
 	// 系统参数
@@ -34,7 +44,7 @@ func SendSms(phone, accessKeyId, accessKeySecret, TemplateParam,TemplateCode str
 	paras["Version"]="2017-05-25"
 	paras["RegionId"]= "cn-hangzhou"
 	paras["PhoneNumbers"]= phone
-	paras["SignName"]="熵链科技"
+	paras["SignName"]=SignName
 	paras["TemplateParam"]=TemplateParam
 	paras["TemplateCode"]=TemplateCode
 	paras["OutId"]="yourOutId"
